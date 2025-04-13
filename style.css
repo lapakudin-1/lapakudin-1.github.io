@@ -1,0 +1,508 @@
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #333;
+    line-height: 1.6;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    height: 100vh;
+    position: fixed;
+}
+
+.logo {
+    text-align: center;
+    padding: 0 20px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.menu {
+    margin-top: 20px;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu > ul > li > a {
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+    position: relative;
+}
+
+.menu > ul > li > a:hover {
+    background-color: #34495e;
+    border-left: 4px solid #3498db;
+}
+
+.menu li a i {
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+/* Dropdown Menu */
+.has-dropdown .dropdown-icon {
+    position: absolute;
+    right: 20px;
+    transition: transform 0.3s ease;
+}
+
+.has-dropdown .dropdown-icon.rotate {
+    transform: rotate(180deg);
+}
+
+.sub-menu {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background-color: #34495e;
+}
+
+.sub-menu.active {
+    max-height: 500px;
+}
+
+.sub-menu li a {
+    display: block;
+    padding: 12px 20px 12px 50px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.sub-menu li a:hover {
+    background-color: #3d566e;
+}
+
+.active {
+    background-color: #34495e;
+    border-left: 4px solid #3498db !important;
+}
+
+.active a {
+    color: #fff !important;
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+    padding: 20px;
+}
+
+/* Promo Banner */
+.promo-banner {
+    position: relative;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.promo-slide {
+    display: none;
+    position: relative;
+}
+
+.promo-slide.active {
+    display: block;
+}
+
+.promo-slide img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.promo-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    color: white;
+    padding: 30px;
+}
+
+.promo-content h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.promo-btn {
+    display: inline-block;
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.promo-btn:hover {
+    background-color: #c0392b;
+}
+
+.promo-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    padding: 0 20px;
+}
+
+.promo-controls button {
+    background-color: rgba(255,255,255,0.3);
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+}
+
+/* Product Styles */
+.produk-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.produk-item {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    position: relative;
+}
+
+.produk-item:hover {
+    transform: translateY(-5px);
+}
+
+.produk-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background-color: #f5f5f5;
+}
+
+.produk-info {
+    padding: 15px;
+}
+
+.produk-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.produk-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+}
+
+.harga {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-bottom: 10px;
+}
+
+.beli-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.beli-btn:hover {
+    background-color: #2980b9;
+}
+
+/* Additional Styles */
+.page-header {
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.popular-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e74c3c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.produk-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.rating {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.sold {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    
+    .wrapper {
+        flex-direction: column;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .produk-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .promo-content h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* General Styles */
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    overflow-x: hidden;
+}
+
+.wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 250px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    position: fixed;
+    height: 100%;
+    z-index: 100;
+}
+
+.logo h1 {
+    text-align: center;
+    margin: 0 0 30px 0;
+    font-size: 1.8rem;
+    color: #ecf0f1;
+}
+
+.menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li a {
+    display: block;
+    padding: 12px 20px;
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.menu li a:hover {
+    background-color: #34495e;
+}
+
+.menu li a.active {
+    background-color: #3498db;
+}
+
+.menu li a i {
+    margin-right: 10px;
+}
+
+.has-dropdown .sub-menu {
+    display: none;
+    background-color: #34495e;
+    padding-left: 20px;
+}
+
+.has-dropdown .sub-menu.active {
+    display: block;
+}
+
+.has-dropdown .dropdown-icon {
+    float: right;
+    transition: transform 0.3s;
+}
+
+.has-dropdown .dropdown-icon.rotate {
+    transform: rotate(180deg);
+}
+
+/* Hero Banner Styles */
+.main-content {
+    flex: 1;
+    margin-left: 250px;
+}
+
+.hero-banner {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('images/game-banner.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.hero-content h1 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+
+.hero-content h2 {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 20px 0;
+    text-transform: uppercase;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.btn-download {
+    display: inline-block;
+    padding: 12px 30px;
+    background-color: #ff6b6b;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+    border: 2px solid #ff6b6b;
+}
+
+.btn-download:hover {
+    background-color: transparent;
+    color: #ff6b6b;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .hero-content h2 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .hero-content h1 {
+        font-size: 1.2rem;
+    }
+
+    .hero-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-content h2 {
+        font-size: 2rem;
+    }
+}
