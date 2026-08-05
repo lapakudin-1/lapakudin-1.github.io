@@ -64,20 +64,21 @@ body {
 
 /* Collapsed toggle floating */
 .sidebar.collapsed .sidebar-toggle {
-    position: absolute;
+    position: fixed; /* place at viewport seam */
     top: 50%;
-    right: -20px;
+    left: calc(72px - 22px); /* center the 44px button on the seam */
     transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: #ffffff;
     color: #1e293b;
-    box-shadow: 0 8px 20px rgba(2,6,23,0.2);
+    box-shadow: 0 12px 28px rgba(2,6,23,0.22);
     display: flex;
     align-items: center;
     justify-content: center;
     border: 6px solid rgba(255,255,255,0.06);
+    z-index: 1100;
 }
 
 /* Vertical separator / reveal strip */
