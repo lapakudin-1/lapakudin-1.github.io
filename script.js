@@ -23,7 +23,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: 'images/qiqi1.png',
             rating: '4.9 ★',
             sold: 'Terjual 120+',
-            badge: 'Popular'
+            badge: 'Popular',
+            category: 'rawat'
         },
         {
             id: 'p2',
@@ -32,7 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Maintenance akun termasuk security check, optimasi, dan backup data penting.',
             image: 'images/qiqi1.png',
             rating: '4.8 ★',
-            sold: 'Terjual 80+'
+            sold: 'Terjual 80+',
+            category: 'rawat'
         },
         {
             id: 'p3',
@@ -41,14 +43,33 @@ document.addEventListener('DOMContentLoaded', function() {
             description: 'Bundle material untuk leveling dan upgrade, hemat dan efektif.',
             image: 'images/qiqi1.png',
             rating: '4.7 ★',
-            sold: 'Terjual 60+'
+            sold: 'Terjual 60+',
+            category: 'material'
+        },
+        {
+            id: 'p4',
+            title: 'Topup Paket Bronze',
+            price: 'Rp 25.000',
+            description: 'Topup cepat untuk berbagai metode pembayaran.',
+            image: 'images/qiqi1.png',
+            rating: '4.6 ★',
+            sold: 'Terjual 200+',
+            category: 'topup'
         }
     ];
 
-    // Render product cards
+    // Render product cards with optional filtering
     const container = document.getElementById('produk-container');
-    function renderProducts() {
-        container.innerHTML = products.map(p => `
+    let currentFilter = 'all';
+    function renderProducts(filter = 'all') {
+        currentFilter = filter;
+        const filtered = (filter === 'all') ? products : products.filter(p => p.category === filter);
+        if (filtered.length === 0) {
+            container.innerHTML = '<p class="no-products">Tidak ada produk di kategori ini.</p>';
+            return;
+        }
+
+        container.innerHTML = filtered.map(p => `
             <article class="produk-item" data-id="${p.id}" tabindex="0">
                 ${p.badge ? `<span class="popular-badge">${p.badge}</span>` : ''}
                 <img src="${p.image}" alt="${p.title}">
@@ -80,6 +101,30 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
+
+    // Menu filtering logic
+    const menuLinks = document.querySelectorAll('.menu a[data-category]');
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(e){
+            e.preventDefault();
+            const cat = this.dataset.category || 'all';
+            // set active class
+            document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
+            this.classList.add('active');
+            // close dropdown if open
+            const parent = this.closest('.has-dropdown');
+            if (parent) {
+                const sub = parent.querySelector('.sub-menu');
+                const icon = parent.querySelector('.dropdown-icon');
+                if (sub) sub.classList.remove('active');
+                if (icon) icon.classList.remove('rotate');
+            }
+            renderProducts(cat);
+        });
+    });
+
+    // initial render
+    renderProducts();
 
     // Modal logic
     const modalOverlay = document.getElementById('product-modal');

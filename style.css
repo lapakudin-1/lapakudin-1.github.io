@@ -538,3 +538,6 @@ body {
 .modal-footer { display:flex; align-items:center; gap:12px; margin-top:18px; }
 .modal-footer .harga { font-size:1.25rem; font-weight:700; color:#ff5252; }
 @media (max-width: 768px) { .modal-body { grid-template-columns: 1fr; } .modal-body img { height:200px; } }
+
+/* No products */
+.no-products { padding: 40px; text-align:center; color:#6b7280; font-weight:600; background:#fff; border-radius:8px; box-shadow:0 6px 18px rgba(44,62,80,0.04); }
