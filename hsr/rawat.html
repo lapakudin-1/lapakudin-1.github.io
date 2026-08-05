@@ -23,23 +23,134 @@
 
     <main class="main-content">
       <div class="page-header">
-        <h2><i class="fas fa-user-shield"></i> Rawat Akun — HSR</h2>
-        <p>Layanan rawat akun Honkai: Star Rail.</p>
+        <div class="section-header">
+          <h2><i class="fas fa-user-shield"></i> Rawat Akun</h2>
+          <p>Daftar paket perawatan akun untuk semua game.</p>
+          
+          <div class="game-tabs" role="tablist">
+            <button class="game-tab active" data-game="all">Semua</button>
+            <button class="game-tab" data-game="genshin">Genshin Impact</button>
+            <button class="game-tab" data-game="wuthering">Wuthering Wave</button>
+            <button class="game-tab" data-game="hsr">HSR</button>
+            <button class="game-tab" data-game="nte">NTE</button>
+          </div>
+        </div>
       </div>
 
-      <section class="produk-container">
-        <article class="produk-item">
-          <img src="..\images\hsr\qiqi1.png" alt="Rawat Mingguan">
-          <div class="produk-info">
-            <h3>Rawat Mingguan</h3>
-            <p>Paket rawat mingguan HSR.</p>
-            <div class="produk-meta"><span class="harga">Rp 50.000/minggu</span></div>
-            <button class="beli-btn">Pesan Sekarang</button>
+      <section id="produk-container" class="produk-container"></section>
+
+      <!-- Product Detail Modal -->
+      <div id="product-modal" class="modal-overlay hidden" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true">
+          <header class="modal-header">
+            <h3 id="modal-title">Product Title</h3>
+            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+          </header>
+          <div class="modal-body">
+            <img id="modal-image" src="" alt="">
+            <p id="modal-description"></p>
+            <div class="produk-meta">
+              <span class="rating" id="modal-rating"></span>
+              <span class="sold" id="modal-sold"></span>
+            </div>
+            <div class="modal-footer">
+              <span class="harga" id="modal-price"></span>
+              <button class="beli-btn" id="modal-buy">Pesan Sekarang</button>
+            </div>
           </div>
-        </article>
-      </section>
+        </div>
+      </div>
     </main>
   </div>
-  <script src="..\script.js"></script>
+  <script>
+    const pageType = window.location.pathname.includes('rawat') ? 'rawat' : 
+                     window.location.pathname.includes('explore') ? 'explore' : 'material';
+    
+    const products = [
+      { id: 'r1', title: 'Rawat Mingguan', price: 'Rp 45.000/minggu', description: 'Daily + Resin — perawatan mingguan.', image: '..\images\genshin\qiqi1.png', rating: '4.9 ★', sold: 'Terjual 120+', type: 'rawat', game: 'genshin' },
+      { id: 'r2', title: 'Rawat Bulan', price: 'Rp 150.000/bulan', description: 'Lengkap dengan event, daily, resin.', image: '..\images\genshin\qiqi1.png', rating: '4.8 ★', sold: 'Terjual 80+', type: 'rawat', game: 'genshin' },
+      { id: 'r3', title: 'Rawat Mingguan', price: 'Rp 50.000/minggu', description: 'Paket rawat untuk Wuthering Wave.', image: '..\images\wuthering\qiqi1.png', rating: '4.7 ★', sold: 'Terjual 60+', type: 'rawat', game: 'wuthering' },
+      { id: 'r4', title: 'Rawat Mingguan', price: 'Rp 50.000/minggu', description: 'Paket rawat HSR.', image: '..\images\hsr\qiqi1.png', rating: '4.6 ★', sold: 'Terjual 40+', type: 'rawat', game: 'hsr' },
+      { id: 'r5', title: 'Rawat Mingguan', price: 'Rp 30.000/minggu', description: 'Paket rawat NTE.', image: '..\images\nte\qiqi1.png', rating: '4.5 ★', sold: 'Terjual 20+', type: 'rawat', game: 'nte' },
+      { id: 'e1', title: 'Explore Paket', price: 'Rp 60.000', description: 'Explore untuk Genshin Impact.', image: '..\images\genshin\qiqi1.png', rating: '4.9 ★', sold: 'Terjual 100+', type: 'explore', game: 'genshin' },
+      { id: 'e2', title: 'Explore Paket', price: 'Rp 55.000', description: 'Explore untuk Wuthering Wave.', image: '..\images\wuthering\qiqi1.png', rating: '4.8 ★', sold: 'Terjual 70+', type: 'explore', game: 'wuthering' },
+      { id: 'e3', title: 'Explore Paket', price: 'Rp 65.000', description: 'Explore untuk HSR.', image: '..\images\hsr\qiqi1.png', rating: '4.7 ★', sold: 'Terjual 50+', type: 'explore', game: 'hsr' },
+      { id: 'e4', title: 'Explore Paket', price: 'Rp 35.000', description: 'Explore untuk NTE.', image: '..\images\nte\qiqi1.png', rating: '4.6 ★', sold: 'Terjual 30+', type: 'explore', game: 'nte' },
+      { id: 'm1', title: 'Material Lengkap', price: 'Rp 45.000', description: 'Material untuk Genshin.', image: '..\images\genshin\qiqi1.png', rating: '4.9 ★', sold: 'Terjual 150+', type: 'material', game: 'genshin' },
+      { id: 'm2', title: 'Material Lengkap', price: 'Rp 40.000', description: 'Material untuk Wuthering.', image: '..\images\wuthering\qiqi1.png', rating: '4.8 ★', sold: 'Terjual 90+', type: 'material', game: 'wuthering' },
+      { id: 'm3', title: 'Material Lengkap', price: 'Rp 55.000', description: 'Material untuk HSR.', image: '..\images\hsr\qiqi1.png', rating: '4.7 ★', sold: 'Terjual 60+', type: 'material', game: 'hsr' },
+      { id: 'm4', title: 'Material Lengkap', price: 'Rp 40.000', description: 'Material untuk NTE.', image: '..\images\nte\qiqi1.png', rating: '4.6 ★', sold: 'Terjual 35+', type: 'material', game: 'nte' }
+    ];
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const container = document.getElementById('produk-container');
+      const modalOverlay = document.getElementById('product-modal');
+      const modalClose = document.getElementById('modal-close');
+      let currentGame = 'all';
+
+      function renderProducts(game = 'all') {
+        currentGame = game;
+        const filtered = products.filter(p => (p.type === pageType) && (game === 'all' || p.game === game));
+        container.innerHTML = filtered.map(p => `
+          <article class="produk-item" data-id="${p.id}" tabindex="0">
+            <img src="${p.image}" alt="${p.title}">
+            <div class="produk-info">
+              <h3>${p.title}</h3>
+              <p>${p.description}</p>
+              <div class="produk-meta">
+                <span class="rating">${p.rating}</span>
+                <span class="sold">${p.sold}</span>
+              </div>
+              <span class="harga">${p.price}</span>
+              <button class="beli-btn" data-id="${p.id}">Pesan Sekarang</button>
+            </div>
+          </article>
+        `).join('');
+
+        container.querySelectorAll('.produk-item').forEach(card => {
+          card.addEventListener('click', function() { openModal(this.dataset.id); });
+          card.addEventListener('keydown', function(e) { if(e.key === 'Enter') openModal(this.dataset.id); });
+        });
+        container.querySelectorAll('.beli-btn').forEach(btn => {
+          btn.addEventListener('click', function(e) { e.stopPropagation(); openModal(this.dataset.id); });
+        });
+      }
+
+      function openModal(id) {
+        const p = products.find(x => x.id === id);
+        if(!p) return;
+        document.getElementById('modal-title').textContent = p.title;
+        document.getElementById('modal-image').src = p.image;
+        document.getElementById('modal-image').alt = p.title;
+        document.getElementById('modal-description').textContent = p.description;
+        document.getElementById('modal-rating').textContent = p.rating;
+        document.getElementById('modal-sold').textContent = p.sold;
+        document.getElementById('modal-price').textContent = p.price;
+        modalOverlay.classList.remove('hidden');
+        modalOverlay.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        modalOverlay.classList.add('hidden');
+        modalOverlay.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', function(e) { if(e.target === this) closeModal(); });
+      document.addEventListener('keydown', function(e) { if(e.key === 'Escape') closeModal(); });
+
+      document.querySelectorAll('.game-tab').forEach(btn => {
+        btn.addEventListener('click', function() {
+          document.querySelectorAll('.game-tab').forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          renderProducts(this.dataset.game || 'all');
+        });
+      });
+
+      renderProducts();
+    });
+  </script>
 </body>
 </html>
