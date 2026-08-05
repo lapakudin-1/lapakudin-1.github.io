@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // initialize from storage
     if(localStorage.getItem('sidebarCollapsed') === '1') setSidebarCollapsed(true);
 
-    // Product data (sample)
+    // Product data (sample) with game property
     const products = [
         {
             id: 'p1',
@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function() {
             rating: '4.9 ★',
             sold: 'Terjual 120+',
             badge: 'Popular',
-            category: 'rawat'
+            category: 'rawat',
+            game: 'genshin'
         },
         {
             id: 'p2',
@@ -58,7 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: 'images/qiqi1.png',
             rating: '4.8 ★',
             sold: 'Terjual 80+',
-            category: 'rawat'
+            category: 'rawat',
+            game: 'hsr'
         },
         {
             id: 'p3',
@@ -68,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
             image: 'images/qiqi1.png',
             rating: '4.7 ★',
             sold: 'Terjual 60+',
-            category: 'material'
+            category: 'material',
+            game: 'wuthering'
         },
         {
             id: 'p4',
@@ -78,18 +81,25 @@ document.addEventListener('DOMContentLoaded', function() {
             image: 'images/qiqi1.png',
             rating: '4.6 ★',
             sold: 'Terjual 200+',
-            category: 'topup'
+            category: 'topup',
+            game: 'nte'
         }
     ];
 
     // Render product cards with optional filtering
     const container = document.getElementById('produk-container');
     let currentFilter = 'all';
-    function renderProducts(filter = 'all') {
+    let currentGame = 'all';
+    function renderProducts(filter = currentFilter, game = currentGame) {
         currentFilter = filter;
-        const filtered = (filter === 'all') ? products : products.filter(p => p.category === filter);
+        currentGame = game;
+        const filtered = products.filter(p => {
+            const byCategory = (currentFilter === 'all') ? true : (p.category === currentFilter);
+            const byGame = (currentGame === 'all') ? true : (p.game === currentGame);
+            return byCategory && byGame;
+        });
         if (filtered.length === 0) {
-            container.innerHTML = '<p class="no-products">Tidak ada produk di kategori ini.</p>';
+            container.innerHTML = '<p class="no-products">Tidak ada produk yang sesuai.</p>';
             return;
         }
 
@@ -143,7 +153,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (sub) sub.classList.remove('active');
                 if (icon) icon.classList.remove('rotate');
             }
-            renderProducts(cat);
+            renderProducts(cat, currentGame);
+        });
+    });
+
+    // Game tabs logic
+    const gameTabs = document.querySelectorAll('.game-tab');
+    gameTabs.forEach(btn => {
+        btn.addEventListener('click', function(){
+            document.querySelectorAll('.game-tab').forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            const g = this.dataset.game || 'all';
+            currentGame = g;
+            renderProducts(currentFilter, currentGame);
         });
     });
 

@@ -409,7 +409,7 @@ body {
     display: flex;
     flex-direction: column;
     margin-bottom: 10px;
-    gap: 8px;
+    gap: 12px;
 }
 
 .section-header h2 {
@@ -422,6 +422,35 @@ body {
     font-size: 1rem;
     color: #64748b;
     font-weight: 500;
+}
+
+/* Game tabs */
+.game-tabs {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+.game-tab {
+    background: transparent;
+    border: 1px solid rgba(30,41,59,0.08);
+    color: #1e293b;
+    padding: 8px 14px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.18s ease;
+}
+
+.game-tab:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(15,23,42,0.06); }
+
+.game-tab.active {
+    background: linear-gradient(135deg,#667eea,#764ba2);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(102,126,234,0.18);
 }
 
 .popular-badge {
