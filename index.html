@@ -51,49 +51,28 @@
                     <p>Handpicked services for top gamers</p>
                 </div>
 
-                <div class="produk-container">
-                    <article class="produk-item">
-                        <span class="popular-badge">Popular</span>
-                        <img src="images/qiqi1.png" alt="Akun Level 60">
-                        <div class="produk-info">
-                            <h3>Akun Level 60</h3>
-                            <p>Akun siap pakai dengan progress tinggi dan item langka.</p>
-                            <div class="produk-meta">
-                                <span class="rating">4.9 ★</span>
-                                <span class="sold">Terjual 120+</span>
-                            </div>
-                            <span class="harga">Rp 150.000</span>
-                            <button class="beli-btn">Beli Sekarang</button>
-                        </div>
-                    </article>
+                <div id="produk-container" class="produk-container"></div>
 
-                    <article class="produk-item">
-                        <img src="images/qiqi1.png" alt="Jasa Rawat Akun">
-                        <div class="produk-info">
-                            <h3>Rawat Akun Profesional</h3>
-                            <p>Maintenance akun termasuk security check dan optimasi.</p>
+                <!-- Product Detail Modal -->
+                <div id="product-modal" class="modal-overlay hidden" aria-hidden="true">
+                    <div class="modal" role="dialog" aria-modal="true">
+                        <header class="modal-header">
+                            <h3 id="modal-title">Product Title</h3>
+                            <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+                        </header>
+                        <div class="modal-body">
+                            <img id="modal-image" src="" alt="">
+                            <p id="modal-description"></p>
                             <div class="produk-meta">
-                                <span class="rating">4.8 ★</span>
-                                <span class="sold">Terjual 80+</span>
+                                <span class="rating" id="modal-rating"></span>
+                                <span class="sold" id="modal-sold"></span>
                             </div>
-                            <span class="harga">Rp 75.000</span>
-                            <button class="beli-btn">Pesan Sekarang</button>
-                        </div>
-                    </article>
-
-                    <article class="produk-item">
-                        <img src="images/qiqi1.png" alt="Material Game">
-                        <div class="produk-info">
-                            <h3>Paket Material Lengkap</h3>
-                            <p>Bundle material untuk leveling dan upgrade.</p>
-                            <div class="produk-meta">
-                                <span class="rating">4.7 ★</span>
-                                <span class="sold">Terjual 60+</span>
+                            <div class="modal-footer">
+                                <span class="harga" id="modal-price"></span>
+                                <button class="beli-btn" id="modal-buy">Beli Sekarang</button>
                             </div>
-                            <span class="harga">Rp 45.000</span>
-                            <button class="beli-btn">Beli Paket</button>
                         </div>
-                    </article>
+                    </div>
                 </div>
             </section>
         </main>

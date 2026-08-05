@@ -12,4 +12,106 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+
+    // Product data (sample)
+    const products = [
+        {
+            id: 'p1',
+            title: 'Akun Level 60',
+            price: 'Rp 150.000',
+            description: 'Akun siap pakai dengan progress tinggi dan item langka. Cocok untuk pemain kompetitif.',
+            image: 'images/qiqi1.png',
+            rating: '4.9 ★',
+            sold: 'Terjual 120+',
+            badge: 'Popular'
+        },
+        {
+            id: 'p2',
+            title: 'Rawat Akun Profesional',
+            price: 'Rp 75.000',
+            description: 'Maintenance akun termasuk security check, optimasi, dan backup data penting.',
+            image: 'images/qiqi1.png',
+            rating: '4.8 ★',
+            sold: 'Terjual 80+'
+        },
+        {
+            id: 'p3',
+            title: 'Paket Material Lengkap',
+            price: 'Rp 45.000',
+            description: 'Bundle material untuk leveling dan upgrade, hemat dan efektif.',
+            image: 'images/qiqi1.png',
+            rating: '4.7 ★',
+            sold: 'Terjual 60+'
+        }
+    ];
+
+    // Render product cards
+    const container = document.getElementById('produk-container');
+    function renderProducts() {
+        container.innerHTML = products.map(p => `
+            <article class="produk-item" data-id="${p.id}" tabindex="0">
+                ${p.badge ? `<span class="popular-badge">${p.badge}</span>` : ''}
+                <img src="${p.image}" alt="${p.title}">
+                <div class="produk-info">
+                    <h3>${p.title}</h3>
+                    <p>${p.description}</p>
+                    <div class="produk-meta">
+                        <span class="rating">${p.rating}</span>
+                        <span class="sold">${p.sold}</span>
+                    </div>
+                    <span class="harga">${p.price}</span>
+                    <button class="beli-btn" data-id="${p.id}">Beli Sekarang</button>
+                </div>
+            </article>
+        `).join('');
+
+        // Attach click handlers for opening modal
+        container.querySelectorAll('.produk-item').forEach(card => {
+            card.addEventListener('click', openModalFromCard);
+            card.addEventListener('keydown', function(e){ if(e.key === 'Enter') openModalFromCard.call(this, e); });
+        });
+        // Prevent card click when pressing buy button
+        container.querySelectorAll('.beli-btn').forEach(btn => {
+            btn.addEventListener('click', function(e){
+                e.stopPropagation();
+                const id = this.dataset.id;
+                // Here could trigger checkout flow; for now show modal
+                openModal(id);
+            });
+        });
+    }
+
+    // Modal logic
+    const modalOverlay = document.getElementById('product-modal');
+    const modalClose = document.getElementById('modal-close');
+    function openModalFromCard(e){
+        const id = this.dataset.id;
+        openModal(id);
+    }
+
+    function openModal(id){
+        const p = products.find(x => x.id === id);
+        if(!p) return;
+        document.getElementById('modal-title').textContent = p.title;
+        const img = document.getElementById('modal-image'); img.src = p.image; img.alt = p.title;
+        document.getElementById('modal-description').textContent = p.description;
+        document.getElementById('modal-rating').textContent = p.rating;
+        document.getElementById('modal-sold').textContent = p.sold;
+        document.getElementById('modal-price').textContent = p.price;
+        modalOverlay.classList.remove('hidden');
+        modalOverlay.setAttribute('aria-hidden','false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal(){
+        modalOverlay.classList.add('hidden');
+        modalOverlay.setAttribute('aria-hidden','true');
+        document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', function(e){ if(e.target === this) closeModal(); });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeModal(); });
+
+    renderProducts();
 });
