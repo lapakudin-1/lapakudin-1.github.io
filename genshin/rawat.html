@@ -103,7 +103,6 @@
                 <span class="sold">${p.sold}</span>
               </div>
               <span class="harga">${p.price}</span>
-              <button class="beli-btn" data-id="${p.id}">Pesan Sekarang</button>
             </div>
           </article>
         `).join('');
@@ -111,9 +110,6 @@
         container.querySelectorAll('.produk-item').forEach(card => {
           card.addEventListener('click', function() { openModal(this.dataset.id); });
           card.addEventListener('keydown', function(e) { if(e.key === 'Enter') openModal(this.dataset.id); });
-        });
-        container.querySelectorAll('.beli-btn').forEach(btn => {
-          btn.addEventListener('click', function(e) { e.stopPropagation(); openModal(this.dataset.id); });
         });
       }
 

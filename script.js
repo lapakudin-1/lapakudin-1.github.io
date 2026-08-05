@@ -115,7 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <span class="sold">${p.sold}</span>
                     </div>
                     <span class="harga">${p.price}</span>
-                    <button class="beli-btn" data-id="${p.id}">Beli Sekarang</button>
                 </div>
             </article>
         `).join('');
@@ -124,15 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         container.querySelectorAll('.produk-item').forEach(card => {
             card.addEventListener('click', openModalFromCard);
             card.addEventListener('keydown', function(e){ if(e.key === 'Enter') openModalFromCard.call(this, e); });
-        });
-        // Prevent card click when pressing buy button
-        container.querySelectorAll('.beli-btn').forEach(btn => {
-            btn.addEventListener('click', function(e){
-                e.stopPropagation();
-                const id = this.dataset.id;
-                // Here could trigger checkout flow; for now show modal
-                openModal(id);
-            });
         });
     }
 
