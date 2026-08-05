@@ -13,6 +13,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Sidebar toggle (collapse/expand)
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    function setSidebarCollapsed(collapsed){
+        if(!sidebar) return;
+        if(collapsed){
+            sidebar.classList.add('collapsed');
+            sidebarToggle && (sidebarToggle.innerHTML = '<i class="fas fa-angle-double-right"></i>');
+        } else {
+            sidebar.classList.remove('collapsed');
+            sidebarToggle && (sidebarToggle.innerHTML = '<i class="fas fa-angle-double-left"></i>');
+        }
+        localStorage.setItem('sidebarCollapsed', collapsed ? '1' : '0');
+    }
+    if(sidebarToggle){
+        sidebarToggle.addEventListener('click', function(e){
+            e.stopPropagation();
+            const collapsed = !sidebar.classList.contains('collapsed');
+            setSidebarCollapsed(collapsed);
+        });
+    }
+    // initialize from storage
+    if(localStorage.getItem('sidebarCollapsed') === '1') setSidebarCollapsed(true);
+
     // Product data (sample)
     const products = [
         {

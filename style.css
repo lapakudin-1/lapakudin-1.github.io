@@ -27,22 +27,63 @@ body {
     position: fixed;
     z-index: 100;
     box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+    transition: width 0.25s ease;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+}
+
+.sidebar.collapsed .menu { display: none; }
+
+.sidebar.collapsed .logo h1 {
+    font-size: 1rem;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 8px 0;
+}
+
+.sidebar.collapsed + .main-content {
+    margin-left: 80px;
 }
 
 .logo {
     text-align: center;
-    padding: 0 20px 30px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 10px 12px 30px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
 }
 
 .logo h1 {
-    font-size: 2rem;
+    font-size: 1.25rem;
     font-weight: 800;
     background: linear-gradient(135deg, #ff6b6b, #ffa94d);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    margin: 0;
 }
+
+.sidebar-toggle {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: rgba(255,255,255,0.06);
+    border: none;
+    color: #cbd5e1;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.sidebar-toggle:hover { background: rgba(255,255,255,0.12); transform: translateX(-2px); }
+
+.sidebar.collapsed .sidebar-toggle { transform: rotate(180deg); }
 
 .menu {
     margin-top: 20px;
